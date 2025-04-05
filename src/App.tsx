@@ -7,9 +7,12 @@ import { ElementInfo } from './ElementInfo';
 
 function App() {
     document.documentElement.lang = 'en';
+    document.body.style.backgroundColor = 'gray';
+    document.body.style.color = 'black';
     const [dataStatus, setDataStatus] = useState<boolean>(false);
     const [elementList, setElementList] = useState<any[]>([]);
     const [elementInfo, setElementInfo] = useState<any|null>(null); 
+    
     useEffect(() => {
         fetchAndStoreElements(setDataStatus);
     }, []);
@@ -24,20 +27,20 @@ function App() {
         <>
             <header><h1>Periodic Table</h1></header>
             <br />
-            <div className='d-flex flex-wrap'>
-                    <main className='p-3'>
+            <main className='d-flex flex-wrap'>
+                    <div className='p-3'>
                     {
                         dataStatus && (
                             <PeriodicTable elements={elementList} elementInfoSetter={setElementInfo} />
                     )}
                       { !dataStatus && <p>No data available</p> }
-                    </main>
+                    </div>
 
-                    <section className='p-3 element-info'>
-                        { elementInfo != null &&(<ElementInfo elementData={elementInfo} open={elementInfo != null} onClose={() => setElementInfo(null)}/>) }
-                    </section>
+                    <article aria-label="element info" role="article" className='p-3 element-info'>
+                        { elementInfo != null && (<ElementInfo elementData={elementInfo}/>) }
+                    </article>
 
-                </div>
+                </main>
         </>
     );
 }

@@ -2,11 +2,9 @@ import React from "react";
 
 interface ElementInfoProps {
     elementData: any
-    open: boolean
-    onClose: () => void
 }
 
-export const ElementInfo: React.FC<ElementInfoProps> = ({elementData, open, onClose}: ElementInfoProps) => {
+export const ElementInfo: React.FC<ElementInfoProps> = ({elementData}: ElementInfoProps) => {
     return (
         <>
             <div aria-label="element information" className="bg-secondary element-info text-white">
@@ -15,7 +13,8 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({elementData, open, onCl
                 <p>appearance: {elementData != null && elementData.appearance}</p>
                 <p>boiling point: {elementData != null && elementData.boil}K</p>
                 <p>discovered by: {elementData != null && elementData.discovered_by}</p>
-            </div>
+                <img className="p-5" src={elementData.bohr_model_image} alt={"image of " + elementData.symbol} />
+                </div>
 
         </>
     );

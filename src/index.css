@@ -71,11 +71,11 @@ button:focus-visible {
 .element-box {
   width: 2cm; /* Scales with screen */
   height: 2cm;
-  max-width: 120px; /* Limits for big screens */
-  max-height: 120px;
+  max-width: 10cm; /* Limits for big screens */
+  max-height: 10cm;
   min-width: .5cm; /* Limits for small screens */
   min-height: .5cm;
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
@@ -96,7 +96,7 @@ button:focus-visible {
 @media (min-width: 1200px) {
     .element-info {
         width: 10cm;
-        height: 10cm;
+        height: 15cm;
     }
 }
 @media (max-width: 1600px) {
