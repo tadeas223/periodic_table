@@ -99,9 +99,10 @@ button:focus-visible {
         height: 15cm;
     }
 }
-@media (max-width: 1600px) {
+@media (max-width: 1800px) {
     .element-info {
         width: 100%;
         height: 10cm;
+        margin-bottom: 5cm;
     }
 }

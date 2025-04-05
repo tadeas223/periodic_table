@@ -13,7 +13,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({elementData}: ElementIn
                 <p>appearance: {elementData != null && elementData.appearance}</p>
                 <p>boiling point: {elementData != null && elementData.boil}K</p>
                 <p>discovered by: {elementData != null && elementData.discovered_by}</p>
-                <img className="p-5" src={elementData.bohr_model_image} alt={"image of " + elementData.symbol} />
+                <img className="p-2 pb-5" src={elementData.bohr_model_image} alt={"image of " + elementData.symbol} />
                 </div>
 
         </>
