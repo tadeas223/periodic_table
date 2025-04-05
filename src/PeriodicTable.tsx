@@ -1,19 +1,20 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import { Element } from "./Element";
 
 interface PeriodicTableProps {
     elements: any[]
+    elementInfoSetter: React.Dispatch<React.SetStateAction<any|null>>
 }
 
-export const PeriodicTable: React.FC<PeriodicTableProps> = ({elements}: PeriodicTableProps) => {
+export const PeriodicTable: React.FC<PeriodicTableProps> = ({elements, elementInfoSetter}: PeriodicTableProps) => {
     let rows = [];
     for(let i = 1; i < 8; i++) {
-        rows.push(row(elements, i));
+        rows.push(row(elements, i, elementInfoSetter));
     }
     return (
-        <> 
-            <table>
-                <thead>
+        <>
+            <table aria-label="periodic table">
+                <thead aria-label="element group">
                     <tr>
                         {Array.from({ length: 18 }, (_, i) => (<th key={i}>{i + 1}</th>))}
                     </tr>
@@ -34,7 +35,7 @@ function isLanthanoidOrAktanoid(element: any): boolean {
     return false;
 }
 
-function row(elements: any[], period: number) {
+function row(elements: any[], period: number, elementInfoSetter: React.Dispatch<SetStateAction<any|null>>) {
     let rowList = [];
     
     for(let i = 1; i <= 18; i ++) {
@@ -46,20 +47,11 @@ function row(elements: any[], period: number) {
         }
         const find = filter.find((e) => !isLanthanoidOrAktanoid(e));
         if(find !== undefined) {
-            rowList.push(<td key={i}><Element elementData={find} /></td>);
+            rowList.push(<td key={i}><Element elementData={find} elementInfoSetter={elementInfoSetter} /></td>);
         } else {
             rowList.push(<td key={i}></td>);
         }
 
-
-
-//        for(let j = 0; j < filter.length; j++) {
-//            if(filter[j] === undefined && isLanthanoidOrAktanoid(filter[j])) {
-//                rowList.push(<td key={i}></td>);
-//            } else {
-//                rowList.push(<td key={i}><Element elementData={filter[j]} /></td>);
-//            }
-//        } 
     }
 
     return (<tr key={period}>{rowList}</tr>);
