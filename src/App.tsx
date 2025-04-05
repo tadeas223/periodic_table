@@ -4,6 +4,7 @@ import { fetchAndStoreElements, getElements } from "./Utils"
 import { useEffect, useState } from "react";
 import { PeriodicTable } from "./PeriodicTable";
 import { ElementInfo } from './ElementInfo';
+import { ElementSearch } from './ElementSearch';
 
 function App() {
     document.documentElement.lang = 'en';
@@ -26,6 +27,9 @@ function App() {
     return (
         <>
             <header><h1>Periodic Table</h1></header>
+            <br />
+            <ElementSearch elements={elementList} elementInfoSetter={setElementInfo} />
+            <br />
             <br />
             <main className='d-flex flex-wrap'>
                     <div className='p-3'>

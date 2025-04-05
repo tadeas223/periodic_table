@@ -9,6 +9,7 @@ export const ElementInfo: React.FC<ElementInfoProps> = ({elementData}: ElementIn
         <>
             <div aria-label="element information" className="bg-secondary element-info text-white">
                 <p>symbol: {elementData != null && elementData.symbol}</p>
+                <p>name: {elementData != null && elementData.name}</p>
                 <p>atomic number: {elementData != null && elementData.number}</p>
                 <p>appearance: {elementData != null && elementData.appearance}</p>
                 <p>boiling point: {elementData != null && elementData.boil}K</p>
