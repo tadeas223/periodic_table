@@ -11,19 +11,35 @@ export const PeriodicTable: React.FC<PeriodicTableProps> = ({elements, elementIn
     for(let i = 1; i < 8; i++) {
         rows.push(row(elements, i, elementInfoSetter));
     }
+
+    const lanthanoids = elements.filter(e => e.number >= 57 && e.number <= 71);
+    const actinoids = elements.filter(e => e.number >= 89 && e.number <= 103);
+
     return (
-        <>
-            <table aria-label="periodic table">
-                <thead aria-label="element group">
-                    <tr>
-                        {Array.from({ length: 18 }, (_, i) => (<th key={i}>{i + 1}</th>))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
-        </>
+    <>
+        <table>
+            <thead>
+                <tr key={2003}>
+                    {Array.from({ length: 18 }, (_, i) => (<td key={i}>{i + 1}</td>))}
+                </tr>
+            </thead>
+            <tbody>
+                {rows}
+                <tr key={2001}>
+                    <td key={10001}></td>
+                    { lanthanoids.map((element) => (
+                        <td key={1000 + element.number}><Element elementData={element} elementInfoSetter={elementInfoSetter} /></td>
+                    ))}
+                </tr>
+                <tr key={2002}>
+                    <td key={10000}></td>
+                    { actinoids.map((element) => (
+                        <td key={1000 + element.number}><Element elementData={element} elementInfoSetter={elementInfoSetter} /></td>
+                    ))}
+                </tr>
+            </tbody>
+        </table>
+    </> 
     );
 }
 

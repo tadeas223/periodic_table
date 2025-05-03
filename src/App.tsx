@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './index.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import { fetchAndStoreElements, getElements } from "./Utils"
 import { useEffect, useState } from "react";
@@ -8,12 +9,12 @@ import { ElementSearch } from './ElementSearch';
 
 function App() {
     document.documentElement.lang = 'en';
-    document.body.style.backgroundColor = 'gray';
-    document.body.style.color = 'black';
     const [dataStatus, setDataStatus] = useState<boolean>(false);
     const [elementList, setElementList] = useState<any[]>([]);
     const [elementInfo, setElementInfo] = useState<any|null>(null); 
-    
+    const [darkTheme, setDarkTheme] = useState<boolean>(false);
+
+
     useEffect(() => {
         fetchAndStoreElements(setDataStatus);
     }, []);
@@ -24,28 +25,45 @@ function App() {
         }
     }, [dataStatus]);
 
+    useEffect(() => {
+        document.documentElement.classList.toggle('dark', darkTheme);
+        if(darkTheme) {
+            document.documentElement.style.backgroundColor = "#24273a";
+            document.body.style.backgroundColor = "#24273a";
+        } else {
+            document.documentElement.style.backgroundColor = "#eff1f5";
+            document.body.style.backgroundColor = "#eff1f5";
+        }
+    }, [darkTheme]);
+
     return (
-        <>
-            <header><h1>Periodic Table</h1></header>
-            <br />
-            <ElementSearch elements={elementList} elementInfoSetter={setElementInfo} />
-            <br />
-            <br />
-            <main className='d-flex flex-wrap'>
-                    <div className='p-3'>
-                    {
-                        dataStatus && (
-                            <PeriodicTable elements={elementList} elementInfoSetter={setElementInfo} />
-                    )}
-                      { !dataStatus && <p>No data available</p> }
-                    </div>
-
-                    <article aria-label="element info" role="article" className='p-3 element-info'>
-                        { elementInfo != null && (<ElementInfo elementData={elementInfo}/>) }
-                    </article>
-
-                </main>
-        </>
+        <div className="App">
+            <div className="mx-auto my-0 text-center mt-1">
+                <h1>Periodic Table</h1>
+                <label htmlFor='scheme' className="me-2">dark theme: </label>
+                <input type='checkbox' onChange={(e) => {
+                    setDarkTheme(e.target.checked);
+                }}></input>
+                <br />
+                <ElementSearch elements={elementList} elementInfoSetter={setElementInfo} />
+                <br />
+                <br />
+            </div>
+            <main className='container'>
+                {
+                    dataStatus && (
+                        <div className="row flex-wrap">
+                            <div className="col" /* style={{backgroundColor: 'purple'}} */>
+                                <PeriodicTable elements={elementList} elementInfoSetter={setElementInfo} />
+                            </div>
+                            <div className="col" /* style={{backgroundColor: 'green'}} */>
+                                <ElementInfo elementData={elementInfo}/>
+                            </div>
+                        </div>
+                )}
+                { !dataStatus && <p>No data available</p> }
+            </main>
+        </div>
     );
 }
 
