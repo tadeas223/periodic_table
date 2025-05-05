@@ -23,7 +23,7 @@ export const ElementSearch: React.FC<ElementSearchProps> = ({elements, elementIn
             <input id="search" type="text" onChange={(e) => {setSearch(e.target.value)}}/>
             <br /> 
             <br /> 
-            <div className="justify-content-center d-flex flex-wrap">
+            <div className="d-flex flex-wrap">
               {list != null && 
                 list.map((e: any) => (
                   <div><Element key={e.id} elementData={e} elementInfoSetter={elementInfoSetter} /></div>
