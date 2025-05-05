@@ -38,7 +38,7 @@ function App() {
 
     return (
         <div className="App">
-            <div className="mx-auto my-0 text-center mt-1">
+            <div className="p-4 mt-1">
                 <h1>Periodic Table</h1>
                 <label htmlFor='scheme' className="me-2">dark theme: </label>
                 <input type='checkbox' onChange={(e) => {
